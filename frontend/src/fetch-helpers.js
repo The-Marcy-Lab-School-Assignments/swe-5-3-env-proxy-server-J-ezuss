@@ -21,9 +21,7 @@ export const getTrendingGifs = async () => {
 
 export const getGifsBySearch = async (searchTerm) => {
   try {
-    const response = await fetch(
-      `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${searchTerm}&limit=3`,
-    );
+    const response = await fetch(`/api/gifs/search?q=${searchTerm}`);
 
     if (!response.ok) {
       throw new Error(

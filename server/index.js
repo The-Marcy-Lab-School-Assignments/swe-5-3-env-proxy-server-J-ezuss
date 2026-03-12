@@ -32,7 +32,22 @@ const getGifs = async (req, res, next) => {
     res.status(503).json({ error: error.message });
   }
 };
+
+const getSearchGifs = async (req, res, next) => {
+  try {
+    const { q } = req.query;
+    const response = await fetch(
+      `https://api.giphy.com/v1/gifs/search?q=${q}&limit=3&rating=g&api_key=${process.env.API_KEY}`,
+    );
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(503).json({ error: error.message });
+  }
+};
+
 app.get('/api/gifs', getGifs);
+app.get('/api/gifs/search', getSearchGifs);
 //////////////////////////
 // Listener
 //////////////////////////
